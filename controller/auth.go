@@ -4,7 +4,8 @@ import (
 	"fmt"
 	"net/http"
 
-	"github.com/SpicyChickenFLY/kamisado/service"
+	"github.com/SpicyChickenFLY/game-server/service"
+	"github.com/SpicyChickenFLY/game-server/utils"
 	"github.com/gin-gonic/gin"
 )
 
@@ -24,9 +25,21 @@ func Login(c *gin.Context) {
 	if nickname == "" {
 		c.JSON(http.StatusBadRequest, gin.H{"msg": "nickname should not be empty"})
 	}
-	service.UserLogined(nickname)
 
-	c.JSON(http.StatusOK, gin.H{"msg": fmt.Sprintf("Welcome, %s", nickname)})
+	// sign jwt token for user
+	token, err := utils.Sign(nickname)
+	if err != nil {
+		c.JSON(http.StatusBadRequest, gin.H{"msg": "server encounter error when signing token: " + err.Error()})
+		return
+	}
+
+	err = service.Login(nickname)
+	if err != nil {
+		c.JSON(http.StatusBadRequest, gin.H{"msg": "server encounter error: " + err.Error()})
+		return
+	}
+
+	c.JSON(http.StatusOK, gin.H{"token": token, "msg": fmt.Sprintf("Welcome, %s", nickname)})
 }
 
 // Register new user

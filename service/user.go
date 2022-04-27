@@ -2,6 +2,7 @@ package service
 
 import (
 	"encoding/json"
+	"errors"
 	"log"
 
 	"github.com/gorilla/websocket"
@@ -13,8 +14,12 @@ func init() {
 	userMap = make(map[string]*User)
 }
 
-func UserLogined(userName string) {
+func Login(userName string) error {
+	if _, ok := userMap[userName]; ok {
+		return errors.New("user name used")
+	}
 	userMap[userName] = newUser(userName)
+	return nil
 }
 
 func Logout(userName string) {

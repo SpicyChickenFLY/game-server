@@ -1,6 +1,6 @@
 package main
 
-import "github.com/SpicyChickenFLY/kamisado/route"
+import "github.com/SpicyChickenFLY/game-server/route"
 
 func main() {
 	route := route.InitRoute()

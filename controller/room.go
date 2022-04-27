@@ -6,7 +6,7 @@ import (
 	"net/http"
 	"strconv"
 
-	"github.com/SpicyChickenFLY/kamisado/service"
+	"github.com/SpicyChickenFLY/game-server/service"
 	"github.com/gin-gonic/gin"
 	"github.com/gorilla/websocket"
 )

@@ -3,8 +3,8 @@ package route
 import (
 	"net/http"
 
-	"github.com/SpicyChickenFLY/kamisado/controller"
-	"github.com/SpicyChickenFLY/kamisado/middleware"
+	"github.com/SpicyChickenFLY/game-server/controller"
+	"github.com/SpicyChickenFLY/game-server/middleware"
 	"github.com/gin-gonic/gin"
 )
 

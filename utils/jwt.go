@@ -26,11 +26,11 @@ var hs = jwt.NewES256(
 // 记录登录信息的 JWT
 type LoginToken struct {
 	jwt.Payload
-	ID uint `json:"id"`
+	Nickname string `json:"nickname"`
 }
 
 // Sign jwt token with id
-func Sign(id uint, username string) ([]byte, error) {
+func Sign(nickname string) ([]byte, error) {
 	now := time.Now()
 	pl := LoginToken{
 		Payload: jwt.Payload{
@@ -42,7 +42,7 @@ func Sign(id uint, username string) ([]byte, error) {
 			IssuedAt:       jwt.NumericDate(now),
 			JWTID:          uuid.NewV4().String(),
 		},
-		ID: id,
+		Nickname: nickname,
 	}
 	token, err := jwt.Sign(pl, hs)
 	return token, err
