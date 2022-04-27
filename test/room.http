@@ -1,0 +1,23 @@
+@baseURL = localhost:9090
+
+
+### login
+GET http://{{baseURL}}/user/nickname
+Accept: application/json
+
+
+### list rooms
+GET http://{{baseURL}}/room/
+Accept: application/json
+
+### enter room
+GET http://{{baseURL}}/room/1
+Content-Type: application/json
+
+{"player_id":1}
+
+### create room
+POST http://{{baseURL}}/room/
+Content-Type: application/json
+
+{"capacity":2}
